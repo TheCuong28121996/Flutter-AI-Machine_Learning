@@ -17,6 +17,8 @@ dependencies:
   fluttertoast: ^8.0.9
   lottie: ^1.2.2
   flutter_svg: ^1.0.3
+  tflite: ^1.1.2
+  image_picker: ^0.8.5
 
 dev_dependencies:
   flutter_test:
@@ -32,3 +34,4 @@ flutter:
     - assets/svg/
     - assets/png/
     - assets/json/
+    - assets/tflite/

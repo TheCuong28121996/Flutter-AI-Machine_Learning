@@ -18,15 +18,14 @@ class SplashPage extends BasePage {
 class _SplashPageState extends BasePageState<SplashPage, BaseBloc> {
   @override
   Widget buildWidget(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: SvgPicture.asset(
-            AssetImages.icMachineLearning,
-            color: Colors.white,
-            width: 150.w,
-            height: 150.h,
-          ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: SvgPicture.asset(
+          AssetPath.icMachineLearning,
+          color: Colors.white,
+          width: 150.w,
+          height: 150.h,
         ),
       ),
     );
@@ -34,9 +33,6 @@ class _SplashPageState extends BasePageState<SplashPage, BaseBloc> {
 
   @override
   void onCreate() {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     });

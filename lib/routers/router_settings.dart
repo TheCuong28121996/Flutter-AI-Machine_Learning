@@ -16,6 +16,8 @@ class RouterSettings {
         return SlideLeftRoute(const SplashPage());
       case HomePage.routeName:
         return SlideLeftRoute(HomePage());
+      case MarvelDetectionPage.routeName:
+        return SlideLeftRoute(MarvelDetectionPage());
       default:
         throw ('this route name does not exist');
     }

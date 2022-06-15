@@ -14,9 +14,9 @@ class HomeBloc extends BaseBloc {
   @override
   void onCreate() {
     _functions.add(FunctionModel(
-        id: Constants.tensorFlowId,
-        name: Constants.tensorFlowName,
-        image: AssetImages.tensorFlow));
+        id: Constants.marvelHeroDetectionId,
+        name: Constants.marvelHeroDetectionName,
+        image: AssetPath.tensorFlow));
 
     _functionsSubject.sink.add(_functions);
   }

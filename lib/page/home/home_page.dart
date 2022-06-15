@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:machine_learning/base/base.dart';
 import 'package:machine_learning/data/model/models.dart';
 import 'package:machine_learning/page/pages.dart';
@@ -19,8 +19,7 @@ class HomePage extends BasePage<HomeBloc> {
 class _HomePageState extends BasePageState<HomePage, HomeBloc> {
   @override
   Widget buildWidget(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: const AppBarCustom(
         titleWidget: Text('Trang chủ'),
       ),
@@ -30,13 +29,10 @@ class _HomePageState extends BasePageState<HomePage, HomeBloc> {
             stream: getBloc.functionsStream,
             builder: (context, snapshot) {
               return GridView.builder(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(16),
                 scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                    childAspectRatio: (1.sw / 2) / (1.sw / 1.85)),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, crossAxisSpacing: 8, mainAxisSpacing: 8),
                 itemCount: snapshot.data?.length ?? 0,
                 itemBuilder: (context, index) {
                   return _gridViewBuilder(snapshot.data![index]);
@@ -44,38 +40,34 @@ class _HomePageState extends BasePageState<HomePage, HomeBloc> {
               );
             }),
       ),
-    ));
+    );
   }
 
   Widget _gridViewBuilder(FunctionModel functionModel) {
-    return GestureDetector(
-        onTap: () async {
-          //_changeModuleCatalogPage(module);
+    return InkWell(
+        onTap: () {
+          _onClickItem(functionModel);
         },
         child: Card(
           color: AppColor.backgroundCard,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
           elevation: 2,
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(
-                  functionModel.image,
-                  color: Colors.white,
-                  width: 80,
-                  height: 80,
-                ),
-                const SizedBox(height: 5),
+                SvgPicture.asset(functionModel.image,
+                    color: AppColor.colorPrimary, width: 70, height: 70),
+                const SizedBox(height: 8),
                 Expanded(
                   child: Center(
                     child: Text(
                       functionModel.name.toUpperCase(),
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -84,6 +76,16 @@ class _HomePageState extends BasePageState<HomePage, HomeBloc> {
             ),
           ),
         ));
+  }
+
+  void _onClickItem(FunctionModel func) {
+    switch (func.id) {
+      case Constants.marvelHeroDetectionId:
+        Navigator.pushNamed(context, MarvelDetectionPage.routeName);
+        break;
+      default:
+        break;
+    }
   }
 
   @override
