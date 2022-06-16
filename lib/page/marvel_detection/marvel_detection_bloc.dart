@@ -50,7 +50,6 @@ class MarvelDetectionBloc extends BaseBloc {
     for (var element in _recognitions) {
       _result += element['label'] + '\n\n';
     }
-
     return _result;
   }
 
